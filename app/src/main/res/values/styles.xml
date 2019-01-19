@@ -17,4 +17,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="listTitle">
+        <item name="android:textSize">@dimen/list_title_size</item>
+        <item name="android:background">@drawable/circular_background</item>
+        <item name="android:paddingLeft">@dimen/title_padding</item>
+        <item name="android:paddingRight">@dimen/title_padding</item>
+        <item name="android:layout_margin">@dimen/fab_margin</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

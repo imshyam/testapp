@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/fab_margin">
+
+    <ImageView
+        android:id="@+id/poster"
+        android:background="@color/transparentBlack"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/movie_item_height"
+        android:scaleType="centerCrop"
+        android:src="@drawable/io" />
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/listTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sample_name"
+        android:layout_gravity="bottom"/>
+
+</FrameLayout>
