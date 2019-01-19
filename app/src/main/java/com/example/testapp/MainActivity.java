@@ -1,33 +1,48 @@
 package com.example.testapp;
 
+import android.net.Uri;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.testapp.fragment.HistoryFragment;
+import com.example.testapp.fragment.MyListFragment;
+import com.example.testapp.fragment.TrendingFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
+public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.fragment, new TrendingFragment());
+        transaction.commit();
+
+        BottomNavigationView navigationView = findViewById(R.id.bottom_nav);
+        navigationView.setOnNavigationItemSelectedListener(item -> {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            switch (item.getItemId()) {
+                case R.id.trending:
+                    fragmentTransaction.replace(R.id.fragment, new TrendingFragment());
+                    fragmentTransaction.commit();
+                    return true;
+                case R.id.history:
+                    fragmentTransaction.replace(R.id.fragment, new HistoryFragment());
+                    fragmentTransaction.commit();
+                    return true;
+                case R.id.my_list:
+                    fragmentTransaction.replace(R.id.fragment, new MyListFragment());
+                    fragmentTransaction.commit();
+                    return true;
             }
+            return false;
         });
     }
 
@@ -51,5 +66,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        Toast.makeText(getApplicationContext(), uri.toString(), Toast.LENGTH_SHORT).show();
     }
 }
