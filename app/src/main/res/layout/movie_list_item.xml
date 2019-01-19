@@ -20,4 +20,22 @@
         android:text="@string/sample_name"
         android:layout_gravity="bottom"/>
 
+
+    <TextView
+        android:id="@+id/rating"
+        style="@style/listTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sample_rating"
+        android:layout_gravity="bottom|right"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_playlist_add_white_24dp"
+        android:backgroundTint="@color/transparentBlack"
+        android:layout_gravity="right"
+        />
+
 </FrameLayout>

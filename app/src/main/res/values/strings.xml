@@ -5,4 +5,6 @@
     <string name="menu_history">History</string>
     <string name="menu_my_list">My list</string>
     <string name="sample_name">A star is born</string>
+    <string name="sample_rating">7.2</string>
+    <string name="sample_year">2019</string>
 </resources>
