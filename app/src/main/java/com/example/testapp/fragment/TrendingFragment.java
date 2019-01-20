@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.testapp.OnFragmentInteractionListener;
 import com.example.testapp.R;
+import com.example.testapp.adapter.MovieListAdapter;
 import com.example.testapp.model.MovieItem;
 import com.example.testapp.viewmodel.MoviesViewModel;
 
@@ -40,6 +43,7 @@ public class TrendingFragment extends Fragment {
     private String mParam2;
 
     private View rootView;
+    private RecyclerView recyclerView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -79,6 +83,9 @@ public class TrendingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_trending, container, false);
+        recyclerView = rootView.findViewById(R.id.movie_list);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return rootView;
     }
 
@@ -98,12 +105,8 @@ public class TrendingFragment extends Fragment {
         viewModel.getMovies().observe(this, responseJson -> {
             List<MovieItem> movies = responseJson.getResults();
             if(movies.size() > 0 && rootView != null) {
-                TextView trending = rootView.findViewById(R.id.trending_text);
-                String moviesList = "";
-                for(MovieItem movieItem: movies) {
-                    moviesList += movieItem.getOriginal_title() + "\n";
-                }
-                trending.setText(moviesList);
+                MovieListAdapter adapter = new MovieListAdapter(movies);
+                recyclerView.setAdapter(adapter);
             }
         });
     }

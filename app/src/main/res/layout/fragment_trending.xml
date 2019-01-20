@@ -5,11 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".fragment.TrendingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/trending_text"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/movie_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/menu_trending" />
+        android:layout_height="wrap_content" />
 
 </FrameLayout>
