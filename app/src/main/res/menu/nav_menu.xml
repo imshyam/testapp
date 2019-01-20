@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/trending"
-        android:title="@string/menu_trending"
-        android:icon="@drawable/ic_trending_up_black_24dp" />
+        android:id="@+id/movies"
+        android:title="@string/menu_movies"
+        android:icon="@drawable/ic_local_movies_black_24dp" />
 
     <item
-        android:id="@+id/history"
-        android:title="@string/menu_history"
-        android:icon="@drawable/ic_history_black_24dp" />
+        android:id="@+id/tv"
+        android:title="@string/menu_tv"
+        android:icon="@drawable/ic_live_tv_black_24dp" />
 
     <item
         android:id="@+id/my_list"

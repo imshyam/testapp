@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.TrendingFragment">
+    tools:context=".fragment.TvFragment">
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/movie_list"
+        android:id="@+id/tv_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

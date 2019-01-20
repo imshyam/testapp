@@ -6,9 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.testapp.fragment.HistoryFragment;
+import com.example.testapp.fragment.TvFragment;
 import com.example.testapp.fragment.MyListFragment;
-import com.example.testapp.fragment.TrendingFragment;
+import com.example.testapp.fragment.MovieFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,19 +22,19 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         setContentView(R.layout.activity_main);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment, new TrendingFragment());
+        transaction.add(R.id.fragment, new MovieFragment());
         transaction.commit();
 
         BottomNavigationView navigationView = findViewById(R.id.bottom_nav);
         navigationView.setOnNavigationItemSelectedListener(item -> {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             switch (item.getItemId()) {
-                case R.id.trending:
-                    fragmentTransaction.replace(R.id.fragment, new TrendingFragment());
+                case R.id.movies:
+                    fragmentTransaction.replace(R.id.fragment, new MovieFragment());
                     fragmentTransaction.commit();
                     return true;
-                case R.id.history:
-                    fragmentTransaction.replace(R.id.fragment, new HistoryFragment());
+                case R.id.tv:
+                    fragmentTransaction.replace(R.id.fragment, new TvFragment());
                     fragmentTransaction.commit();
                     return true;
                 case R.id.my_list:
