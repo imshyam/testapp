@@ -2,11 +2,8 @@ package com.example.testapp.repository;
 
 import android.util.Log;
 
-import com.example.testapp.model.MovieItem;
 import com.example.testapp.model.ResponseJson;
 import com.example.testapp.service.WebService;
-
-import java.util.List;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -40,7 +37,7 @@ public class WebRepository {
 
     public LiveData<ResponseJson> getMovies() {
         final MutableLiveData<ResponseJson> responseJson = new MutableLiveData<>();
-        webService.getTrendingWeek().enqueue(new Callback<ResponseJson>() {
+        webService.getTrendingMoviesWeek().enqueue(new Callback<ResponseJson>() {
             @Override
             public void onResponse(Call<ResponseJson> call, Response<ResponseJson> response) {
                 responseJson.setValue(response.body());
