@@ -6,19 +6,18 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import lombok.Data;
 
-@Entity(tableName = "movies")
 @Data
 public class MovieItem {
-    @PrimaryKey
+//    @PrimaryKey
     long id;
 
-    String originalTitle;
-    String posterPath;
+    String original_title;
+    String poster_path;
     boolean adult;
-    List<String> genreIds;
-    String originalLanguage;
-    String releaseDate;
-    double voteAverage;
+    List<String> genre_ids;
+    String original_language;
+    String release_date;
+    double vote_average;
     double popularity;
     String overview;
 

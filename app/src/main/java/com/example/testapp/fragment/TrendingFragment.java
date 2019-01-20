@@ -4,20 +4,27 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.testapp.OnFragmentInteractionListener;
 import com.example.testapp.R;
+import com.example.testapp.model.MovieItem;
+import com.example.testapp.viewmodel.MoviesViewModel;
+
+import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TrendingFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link TrendingFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -31,6 +38,8 @@ public class TrendingFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private View rootView;
 
     private OnFragmentInteractionListener mListener;
 
@@ -69,7 +78,8 @@ public class TrendingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trending, container, false);
+        rootView = inflater.inflate(R.layout.fragment_trending, container, false);
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -77,6 +87,25 @@ public class TrendingFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        MoviesViewModel viewModel = ViewModelProviders.of(getActivity()).get(MoviesViewModel.class);
+
+        viewModel.getMovies().observe(this, responseJson -> {
+            List<MovieItem> movies = responseJson.getResults();
+            if(movies.size() > 0 && rootView != null) {
+                TextView trending = rootView.findViewById(R.id.trending_text);
+                String moviesList = "";
+                for(MovieItem movieItem: movies) {
+                    moviesList += movieItem.getOriginal_title() + "\n";
+                }
+                trending.setText(moviesList);
+            }
+        });
     }
 
     @Override
