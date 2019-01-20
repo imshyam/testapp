@@ -2,7 +2,8 @@ package com.example.testapp.repository;
 
 import android.util.Log;
 
-import com.example.testapp.model.ResponseJson;
+import com.example.testapp.model.ResponseMovieJson;
+import com.example.testapp.model.ResponseTvJson;
 import com.example.testapp.service.WebService;
 
 import androidx.lifecycle.LiveData;
@@ -35,20 +36,35 @@ public class WebRepository {
         return repository;
     }
 
-    public LiveData<ResponseJson> getMovies() {
-        final MutableLiveData<ResponseJson> responseJson = new MutableLiveData<>();
-        webService.getTrendingMoviesWeek().enqueue(new Callback<ResponseJson>() {
+    public LiveData<ResponseMovieJson> getMovies() {
+        final MutableLiveData<ResponseMovieJson> responseJson = new MutableLiveData<>();
+        webService.getTrendingMoviesWeek().enqueue(new Callback<ResponseMovieJson>() {
             @Override
-            public void onResponse(Call<ResponseJson> call, Response<ResponseJson> response) {
+            public void onResponse(Call<ResponseMovieJson> call, Response<ResponseMovieJson> response) {
                 responseJson.setValue(response.body());
             }
 
             @Override
-            public void onFailure(Call<ResponseJson> call, Throwable t) {
+            public void onFailure(Call<ResponseMovieJson> call, Throwable t) {
                 Log.e("RETROFIT", t.getMessage());
             }
         });
         return responseJson;
     }
 
+    public LiveData<ResponseTvJson> getTvSeries() {
+        final MutableLiveData<ResponseTvJson> responseJson = new MutableLiveData<>();
+        webService.getTrendingTvSeriesWeek().enqueue(new Callback<ResponseTvJson>() {
+            @Override
+            public void onResponse(Call<ResponseTvJson> call, Response<ResponseTvJson> response) {
+                responseJson.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ResponseTvJson> call, Throwable t) {
+                Log.e("RETROFIT", t.getMessage());
+            }
+        });
+        return responseJson;
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.testapp.viewmodel;
 
-import com.example.testapp.model.ResponseJson;
+import com.example.testapp.model.ResponseMovieJson;
+import com.example.testapp.model.ResponseTvJson;
 import com.example.testapp.repository.WebRepository;
 
 import androidx.lifecycle.LiveData;
@@ -9,14 +10,15 @@ import androidx.lifecycle.ViewModel;
 
 public class MoviesViewModel extends ViewModel {
 
-    private LiveData<ResponseJson> movies;
+    private LiveData<ResponseMovieJson> movies;
+    private LiveData<ResponseTvJson> tvSeries;
     private WebRepository repository;
 
     MoviesViewModel() {
         repository = WebRepository.init();
     }
 
-    public LiveData<ResponseJson> getMovies() {
+    public LiveData<ResponseMovieJson> getMovies() {
 
         if(movies == null) {
             movies = new MutableLiveData<>();
@@ -29,4 +31,15 @@ public class MoviesViewModel extends ViewModel {
         movies = repository.getMovies();
     }
 
+    public LiveData<ResponseTvJson> getTvSeries() {
+        if(tvSeries == null) {
+            tvSeries = new MutableLiveData<>();
+            loadTvSeries();
+        }
+        return tvSeries;
+    }
+
+    private void loadTvSeries() {
+        tvSeries = repository.getTvSeries();
+    }
 }
