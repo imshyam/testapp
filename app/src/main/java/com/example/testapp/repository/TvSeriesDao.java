@@ -16,4 +16,7 @@ public interface TvSeriesDao {
 
     @Query(value = "select * from tv_series;")
     List<TvSeriesItem> getTvSeries();
+
+    @Query(value = "delete from tv_series;")
+    void deleteAll();
 }

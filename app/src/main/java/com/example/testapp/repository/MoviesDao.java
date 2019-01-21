@@ -16,4 +16,7 @@ public interface MoviesDao {
 
     @Query(value = "select * from movies;")
     List<MovieItem> getMovies();
+
+    @Query(value = "delete from movies;")
+    void deleteAll();
 }
