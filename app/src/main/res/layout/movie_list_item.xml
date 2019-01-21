@@ -6,11 +6,9 @@
 
     <ImageView
         android:id="@+id/poster"
-        android:background="@color/transparentBlack"
         android:layout_width="match_parent"
         android:layout_height="@dimen/movie_item_height"
-        android:scaleType="centerCrop"
-        android:src="@drawable/io" />
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/title"
@@ -29,13 +27,13 @@
         android:text="@string/sample_rating"
         android:layout_gravity="bottom|right"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
+    <ImageButton
+        android:id="@+id/add_to_my_list"
+        android:layout_width="@dimen/btn_add_size"
+        android:layout_height="@dimen/btn_add_size"
+        android:background="@drawable/circular_btn_add"
         android:src="@drawable/ic_playlist_add_white_24dp"
-        android:backgroundTint="@color/transparentBlack"
-        android:layout_gravity="right"
-        />
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_gravity="right"/>
 
 </FrameLayout>
