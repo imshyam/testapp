@@ -1,8 +1,7 @@
-package com.example.testapp.repository;
+package com.example.testapp.dao;
 
 import android.content.Context;
 
-import com.example.testapp.model.GenreTypeConverter;
 import com.example.testapp.model.TvSeriesItem;
 
 import androidx.room.Database;

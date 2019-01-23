@@ -1,4 +1,4 @@
-package com.example.testapp.repository;
+package com.example.testapp.dao;
 
 import com.example.testapp.model.TvSeriesItem;
 

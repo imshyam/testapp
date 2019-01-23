@@ -11,10 +11,10 @@ import com.example.testapp.OnFragmentInteractionListener;
 import com.example.testapp.R;
 import com.example.testapp.adapter.TvListAdapter;
 import com.example.testapp.executer.AppExecutor;
-import com.example.testapp.repository.MovieDatabase;
-import com.example.testapp.repository.MoviesDao;
-import com.example.testapp.repository.TvSeriesDao;
-import com.example.testapp.repository.TvSeriesDatabase;
+import com.example.testapp.dao.MovieDatabase;
+import com.example.testapp.dao.MoviesDao;
+import com.example.testapp.dao.TvSeriesDao;
+import com.example.testapp.dao.TvSeriesDatabase;
 import com.example.testapp.viewmodel.TvMoviesViewModel;
 import com.example.testapp.viewmodel.ViewModelFactory;
 

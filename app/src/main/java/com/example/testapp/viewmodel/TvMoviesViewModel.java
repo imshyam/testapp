@@ -1,11 +1,9 @@
 package com.example.testapp.viewmodel;
 
 import com.example.testapp.model.MovieItem;
-import com.example.testapp.model.ResponseMovieJson;
-import com.example.testapp.model.ResponseTvJson;
 import com.example.testapp.model.TvSeriesItem;
-import com.example.testapp.repository.MoviesDao;
-import com.example.testapp.repository.TvSeriesDao;
+import com.example.testapp.dao.MoviesDao;
+import com.example.testapp.dao.TvSeriesDao;
 import com.example.testapp.repository.WebRepository;
 
 import java.util.List;

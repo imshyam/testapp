@@ -2,6 +2,8 @@ package com.example.testapp.repository;
 
 import android.util.Log;
 
+import com.example.testapp.dao.MoviesDao;
+import com.example.testapp.dao.TvSeriesDao;
 import com.example.testapp.model.MovieItem;
 import com.example.testapp.model.ResponseMovieJson;
 import com.example.testapp.model.ResponseTvJson;

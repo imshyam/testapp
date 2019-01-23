@@ -1,7 +1,7 @@
 package com.example.testapp.viewmodel;
 
-import com.example.testapp.repository.MoviesDao;
-import com.example.testapp.repository.TvSeriesDao;
+import com.example.testapp.dao.MoviesDao;
+import com.example.testapp.dao.TvSeriesDao;
 
 import java.util.concurrent.Executor;
 
