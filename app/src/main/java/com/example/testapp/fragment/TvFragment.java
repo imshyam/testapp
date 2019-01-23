@@ -3,26 +3,28 @@ package com.example.testapp.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.testapp.OnFragmentInteractionListener;
 import com.example.testapp.R;
-import com.example.testapp.adapter.MovieListAdapter;
 import com.example.testapp.adapter.TvListAdapter;
-import com.example.testapp.model.MovieItem;
-import com.example.testapp.model.TvSeriesItem;
-import com.example.testapp.viewmodel.MoviesViewModel;
+import com.example.testapp.executer.AppExecutor;
+import com.example.testapp.repository.MovieDatabase;
+import com.example.testapp.repository.MoviesDao;
+import com.example.testapp.repository.TvSeriesDao;
+import com.example.testapp.repository.TvSeriesDatabase;
+import com.example.testapp.viewmodel.TvMoviesViewModel;
+import com.example.testapp.viewmodel.ViewModelFactory;
 
-import java.util.List;
+import java.util.concurrent.Executor;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,10 +80,15 @@ public class TvFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        MoviesViewModel viewModel = ViewModelProviders.of(getActivity()).get(MoviesViewModel.class);
 
-        viewModel.getTvSeries().observe(this, responseJson -> {
-            List<TvSeriesItem> tvSeriesItems = responseJson.getResults();
+        MoviesDao moviesDao = MovieDatabase.getInstance(getActivity()).moviesDao();
+        TvSeriesDao tvSeriesDao = TvSeriesDatabase.getInstance(getActivity()).tvSeriesDao();
+        Executor executor = AppExecutor.getInstance().diskIO();
+
+        ViewModelFactory viewModelFactory = new ViewModelFactory(moviesDao, tvSeriesDao, executor);
+        TvMoviesViewModel viewModel = ViewModelProviders.of(this, viewModelFactory).get(TvMoviesViewModel.class);
+
+        viewModel.getTvSeries().observe(this, tvSeriesItems -> {
             if(tvSeriesItems.size() > 0 && rootView != null) {
                 TvListAdapter adapter = new TvListAdapter(tvSeriesItems);
                 recyclerView.setAdapter(adapter);
