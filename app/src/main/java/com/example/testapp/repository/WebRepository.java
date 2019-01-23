@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -52,7 +51,7 @@ public class WebRepository {
             @Override
             public void onResponse(Call<ResponseMovieJson> call, Response<ResponseMovieJson> response) {
                 List<MovieItem> movieItems = response.body().getResults();
-                moviesDao.insertAll(movieItems);
+                executor.execute(() -> moviesDao.insertAll(movieItems));
             }
 
             @Override
@@ -67,7 +66,7 @@ public class WebRepository {
             @Override
             public void onResponse(Call<ResponseTvJson> call, Response<ResponseTvJson> response) {
                 List<TvSeriesItem> tvSeriesItems = response.body().getResults();
-                tvSeriesDao.insertAll(tvSeriesItems);
+                executor.execute(() -> tvSeriesDao.insertAll(tvSeriesItems));
             }
 
             @Override
