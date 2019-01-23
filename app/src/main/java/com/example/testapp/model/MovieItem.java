@@ -2,6 +2,7 @@ package com.example.testapp.model;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import lombok.Data;
@@ -9,9 +10,8 @@ import lombok.Data;
 @Entity(tableName = "movies")
 @Data
 public class MovieItem {
-    @PrimaryKey
-    long id;
-
+    @PrimaryKey @NonNull
+    String id;
     String original_title;
     String poster_path;
     boolean adult;
