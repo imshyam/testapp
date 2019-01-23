@@ -2,13 +2,16 @@ package com.example.testapp.repository;
 
 import android.content.Context;
 
+import com.example.testapp.model.GenreTypeConverter;
 import com.example.testapp.model.MovieItem;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
-@Database(entities = MovieItem.class, version = 1)
+@Database(entities = MovieItem.class, version = 1, exportSchema = false)
+@TypeConverters(GenreTypeConverter.class)
 public abstract class MovieDatabase extends RoomDatabase {
 
     public abstract MoviesDao moviesDao();
