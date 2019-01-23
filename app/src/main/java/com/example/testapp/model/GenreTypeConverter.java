@@ -14,12 +14,12 @@ public class GenreTypeConverter {
     static Gson gson = new Gson();
 
     @TypeConverter
-    public static String toCommaSaparatedString(List<Long> genres) {
+    public static String toCommaSaparatedString(List<String> genres) {
         return gson.toJson(genres);
     }
 
     @TypeConverter
-    public static List<Long> listGenreToString(String genres) {
+    public static List<String> listGenreToString(String genres) {
         if (genres == null) {
             return Collections.emptyList();
         }
