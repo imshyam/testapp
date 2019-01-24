@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.testapp.R;
+import com.example.testapp.dao.FavoriteDao;
 import com.example.testapp.model.MovieItem;
 import com.example.testapp.model.TvSeriesItem;
 
@@ -15,9 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class TvListAdapter extends RecyclerView.Adapter<TvViewHolder> {
     List<TvSeriesItem> tvSeriesItems;
+    FavoriteDao favoriteDao;
 
-    public TvListAdapter(List<TvSeriesItem> tvSeriesItems) {
+    public TvListAdapter(List<TvSeriesItem> tvSeriesItems, FavoriteDao favoriteDao) {
         this.tvSeriesItems = tvSeriesItems;
+        this.favoriteDao = favoriteDao;
     }
     @NonNull
     @Override
