@@ -21,7 +21,10 @@ class MovieViewHolder extends RecyclerView.ViewHolder {
 
     public void bindItem(MovieItem movie) {
         TextView title = itemView.findViewById(R.id.title);
-        title.setText(movie.getOriginal_title());
+        if(movie.getOriginal_title() != null)
+            title.setText(movie.getOriginal_title());
+        else
+            title.setText(movie.getOriginal_name());
         TextView rating = itemView.findViewById(R.id.rating);
         rating.setText(movie.getVote_average() + "");
         ImageView poster = itemView.findViewById(R.id.poster);

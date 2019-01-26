@@ -12,9 +12,12 @@ import com.example.testapp.adapter.MovieListAdapter;
 import com.example.testapp.dao.MovieDatabase;
 import com.example.testapp.dao.MoviesDao;
 import com.example.testapp.executer.AppExecutor;
+import com.example.testapp.model.MovieItem;
 import com.example.testapp.viewmodel.TvMoviesViewModel;
 import com.example.testapp.viewmodel.ViewModelFactory;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executor;
 
 import androidx.annotation.Nullable;
@@ -84,7 +87,13 @@ public class MovieFragment extends Fragment {
         ViewModelFactory viewModelFactory = new ViewModelFactory(moviesDao, executor);
         TvMoviesViewModel viewModel = ViewModelProviders.of(this, viewModelFactory).get(TvMoviesViewModel.class);
 
-        viewModel.getMovies().observe(this, movieItems -> {
+        viewModel.getMovies().observe(this, allItems -> {
+            List<MovieItem> movieItems = new ArrayList<>();
+            for (MovieItem item: allItems) {
+                if (item.getOriginal_title() != null) {
+                    movieItems.add(item);
+                }
+            }
             if(movieItems.size() > 0 && rootView != null) {
                 MovieListAdapter adapter = new MovieListAdapter(movieItems);
                 recyclerView.setAdapter(adapter);
