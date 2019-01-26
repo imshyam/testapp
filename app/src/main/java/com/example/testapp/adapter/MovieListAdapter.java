@@ -5,8 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.testapp.R;
-import com.example.testapp.dao.FavoriteDao;
-import com.example.testapp.model.FavoriteItem;
 import com.example.testapp.model.MovieItem;
 
 import java.util.List;
@@ -16,11 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieViewHolder> {
     List<MovieItem> movieItems;
-    FavoriteDao favoriteDao;
+//    FavoriteDao favoriteDao;
 
-    public MovieListAdapter(List<MovieItem> movieItems, FavoriteDao favoriteDao) {
+    public MovieListAdapter(List<MovieItem> movieItems/*FavoriteDao favoriteDao*/) {
         this.movieItems = movieItems;
-        this.favoriteDao = favoriteDao;
+//        this.favoriteDao = favoriteDao;
     }
     @NonNull
     @Override
@@ -35,7 +33,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieViewHolder> {
         MovieItem movie = movieItems.get(position);
         holder.bindItem(movie);
         holder.itemView.findViewById(R.id.add_to_my_list).setOnClickListener((view) -> {
-            favoriteDao.insertAll(new FavoriteItem());
+            // TODO: 25/1/19 insert to favorite
+//            favoriteDao.insertAll(new FavoriteItem());
         });
     }
 

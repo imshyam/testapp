@@ -1,7 +1,6 @@
 package com.example.testapp.service;
 
 import com.example.testapp.model.ResponseMovieJson;
-import com.example.testapp.model.ResponseTvJson;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -15,5 +14,5 @@ public interface WebService {
     Call<ResponseMovieJson> getTrendingMoviesWeek();
 
     @GET(value = TRENDING_TV_WEEK)
-    Call<ResponseTvJson> getTrendingTvSeriesWeek();
+    Call<ResponseMovieJson> getTrendingTvSeriesWeek();
 }

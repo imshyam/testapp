@@ -1,9 +1,7 @@
 package com.example.testapp.viewmodel;
 
-import com.example.testapp.model.MovieItem;
-import com.example.testapp.model.TvSeriesItem;
 import com.example.testapp.dao.MoviesDao;
-import com.example.testapp.dao.TvSeriesDao;
+import com.example.testapp.model.MovieItem;
 import com.example.testapp.repository.WebRepository;
 
 import java.util.List;
@@ -16,11 +14,11 @@ import androidx.lifecycle.ViewModel;
 public class TvMoviesViewModel extends ViewModel {
 
     private LiveData<List<MovieItem>> movies;
-    private LiveData<List<TvSeriesItem>> tvSeries;
+    private LiveData<List<MovieItem>> tvSeries;
     private WebRepository repository;
 
-    TvMoviesViewModel(MoviesDao moviesDao, TvSeriesDao tvSeriesDao, Executor executor) {
-        repository = WebRepository.init(moviesDao, tvSeriesDao, executor);
+    TvMoviesViewModel(MoviesDao moviesDao, Executor executor) {
+        repository = WebRepository.init(moviesDao, executor);
     }
 
     public LiveData<List<MovieItem>> getMovies() {
@@ -36,7 +34,7 @@ public class TvMoviesViewModel extends ViewModel {
         movies = repository.loadMovies();
     }
 
-    public LiveData<List<TvSeriesItem>> getTvSeries() {
+    public LiveData<List<MovieItem>> getTvSeries() {
         if(tvSeries == null) {
             tvSeries = new MutableLiveData<>();
             loadTvSeries();

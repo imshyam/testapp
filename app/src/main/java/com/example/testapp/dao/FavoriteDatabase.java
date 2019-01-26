@@ -3,14 +3,15 @@ package com.example.testapp.dao;
 import android.content.Context;
 
 import com.example.testapp.model.FavoriteItem;
+import com.example.testapp.model.MovieItem;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = FavoriteItem.class, version = 1, exportSchema = false)
-@TypeConverters(HistoryItemTypeConverter.class)
+@Database(entities = { FavoriteItem.class, MovieItem.class}, version = 1, exportSchema = false)
+@TypeConverters({HistoryItemTypeConverter.class, GenreTypeConverter.class})
 public abstract class FavoriteDatabase extends RoomDatabase {
 
     public abstract FavoriteDao favoriteDao();

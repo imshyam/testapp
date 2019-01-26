@@ -9,11 +9,9 @@ import android.view.ViewGroup;
 import com.example.testapp.OnFragmentInteractionListener;
 import com.example.testapp.R;
 import com.example.testapp.adapter.MovieListAdapter;
-import com.example.testapp.executer.AppExecutor;
 import com.example.testapp.dao.MovieDatabase;
 import com.example.testapp.dao.MoviesDao;
-import com.example.testapp.dao.TvSeriesDao;
-import com.example.testapp.dao.TvSeriesDatabase;
+import com.example.testapp.executer.AppExecutor;
 import com.example.testapp.viewmodel.TvMoviesViewModel;
 import com.example.testapp.viewmodel.ViewModelFactory;
 
@@ -81,10 +79,9 @@ public class MovieFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         MoviesDao moviesDao = MovieDatabase.getInstance(getActivity()).moviesDao();
-        TvSeriesDao tvSeriesDao = TvSeriesDatabase.getInstance(getActivity()).tvSeriesDao();
         Executor executor = AppExecutor.getInstance().diskIO();
 
-        ViewModelFactory viewModelFactory = new ViewModelFactory(moviesDao, tvSeriesDao, executor);
+        ViewModelFactory viewModelFactory = new ViewModelFactory(moviesDao, executor);
         TvMoviesViewModel viewModel = ViewModelProviders.of(this, viewModelFactory).get(TvMoviesViewModel.class);
 
         viewModel.getMovies().observe(this, movieItems -> {

@@ -5,9 +5,11 @@ import com.example.testapp.model.FavoriteItem;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+@Dao
 public interface FavoriteDao {
     @Insert
     void insertAll(FavoriteItem... favoriteItems);

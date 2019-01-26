@@ -3,11 +3,8 @@ package com.example.testapp.repository;
 import android.util.Log;
 
 import com.example.testapp.dao.MoviesDao;
-import com.example.testapp.dao.TvSeriesDao;
 import com.example.testapp.model.MovieItem;
 import com.example.testapp.model.ResponseMovieJson;
-import com.example.testapp.model.ResponseTvJson;
-import com.example.testapp.model.TvSeriesItem;
 import com.example.testapp.service.WebService;
 
 import java.util.List;
@@ -26,24 +23,22 @@ public class WebRepository {
 
     private WebService webService;
     private static WebRepository repository;
-    private TvSeriesDao tvSeriesDao;
     private MoviesDao moviesDao;
     private Executor executor;
 
-    private WebRepository(MoviesDao moviesDao, TvSeriesDao tvSeriesDao, Executor executor) {
+    private WebRepository(MoviesDao moviesDao, Executor executor) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webService = retrofit.create(WebService.class);
         this.moviesDao = moviesDao;
-        this.tvSeriesDao = tvSeriesDao;
         this.executor = executor;
     }
 
-    public static WebRepository init(MoviesDao moviesDao, TvSeriesDao tvSeriesDao, Executor executor) {
+    public static WebRepository init(MoviesDao moviesDao, Executor executor) {
         if(repository == null) {
-            repository = new WebRepository(moviesDao, tvSeriesDao, executor);
+            repository = new WebRepository(moviesDao, executor);
         }
         return repository;
     }
@@ -64,27 +59,29 @@ public class WebRepository {
     }
 
     private void refreshTvSeries() {
-        webService.getTrendingTvSeriesWeek().enqueue(new Callback<ResponseTvJson>() {
+        webService.getTrendingTvSeriesWeek().enqueue(new Callback<ResponseMovieJson>() {
             @Override
-            public void onResponse(Call<ResponseTvJson> call, Response<ResponseTvJson> response) {
-                List<TvSeriesItem> tvSeriesItems = response.body().getResults();
-                executor.execute(() -> tvSeriesDao.insertAll(tvSeriesItems));
+            public void onResponse(Call<ResponseMovieJson> call, Response<ResponseMovieJson> response) {
+                List<MovieItem> movieItems = response.body().getResults();
+                executor.execute(() -> moviesDao.insertAll(movieItems));
             }
 
             @Override
-            public void onFailure(Call<ResponseTvJson> call, Throwable t) {
+            public void onFailure(Call<ResponseMovieJson> call, Throwable t) {
                 Log.e("RETROFIT", t.getMessage());
             }
         });
     }
+
 
     public LiveData<List<MovieItem>> loadMovies() {
         refreshMovies();
         return moviesDao.getMovies();
     }
 
-    public LiveData<List<TvSeriesItem>> loadTvSeries() {
+    public LiveData<List<MovieItem>> loadTvSeries() {
         refreshTvSeries();
-        return tvSeriesDao.getTvSeries();
+        return moviesDao.getMovies();
     }
+
 }

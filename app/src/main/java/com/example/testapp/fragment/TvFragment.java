@@ -9,12 +9,10 @@ import android.view.ViewGroup;
 
 import com.example.testapp.OnFragmentInteractionListener;
 import com.example.testapp.R;
-import com.example.testapp.adapter.TvListAdapter;
-import com.example.testapp.executer.AppExecutor;
+import com.example.testapp.adapter.MovieListAdapter;
 import com.example.testapp.dao.MovieDatabase;
 import com.example.testapp.dao.MoviesDao;
-import com.example.testapp.dao.TvSeriesDao;
-import com.example.testapp.dao.TvSeriesDatabase;
+import com.example.testapp.executer.AppExecutor;
 import com.example.testapp.viewmodel.TvMoviesViewModel;
 import com.example.testapp.viewmodel.ViewModelFactory;
 
@@ -82,15 +80,14 @@ public class TvFragment extends Fragment {
 
 
         MoviesDao moviesDao = MovieDatabase.getInstance(getActivity()).moviesDao();
-        TvSeriesDao tvSeriesDao = TvSeriesDatabase.getInstance(getActivity()).tvSeriesDao();
         Executor executor = AppExecutor.getInstance().diskIO();
 
-        ViewModelFactory viewModelFactory = new ViewModelFactory(moviesDao, tvSeriesDao, executor);
+        ViewModelFactory viewModelFactory = new ViewModelFactory(moviesDao, executor);
         TvMoviesViewModel viewModel = ViewModelProviders.of(this, viewModelFactory).get(TvMoviesViewModel.class);
 
         viewModel.getTvSeries().observe(this, tvSeriesItems -> {
             if(tvSeriesItems.size() > 0 && rootView != null) {
-                TvListAdapter adapter = new TvListAdapter(tvSeriesItems);
+                MovieListAdapter adapter = new MovieListAdapter(tvSeriesItems);
                 recyclerView.setAdapter(adapter);
             }
         });
