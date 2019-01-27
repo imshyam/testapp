@@ -5,6 +5,7 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Entity(tableName = "favorite",
@@ -15,14 +16,15 @@ import lombok.Data;
             childColumns = "itemId",
             onDelete = ForeignKey.CASCADE))
 @Data
+@AllArgsConstructor
 public class FavoriteItem {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     long id;
 
     private String itemId;
     private HistoryItemTypeEnum itemType;
-    public FavoriteItem() {}
 
+    public FavoriteItem(){}
     @Ignore
     public FavoriteItem(String itemId, HistoryItemTypeEnum itemType) {
         this.itemId = itemId;

@@ -2,7 +2,9 @@ package com.example.testapp.repository;
 
 import android.util.Log;
 
+import com.example.testapp.dao.FavoriteDao;
 import com.example.testapp.dao.MoviesDao;
+import com.example.testapp.model.FavoriteItem;
 import com.example.testapp.model.MovieItem;
 import com.example.testapp.model.ResponseMovieJson;
 import com.example.testapp.service.WebService;
@@ -24,21 +26,23 @@ public class WebRepository {
     private WebService webService;
     private static WebRepository repository;
     private MoviesDao moviesDao;
+    private FavoriteDao favoriteDao;
     private Executor executor;
 
-    private WebRepository(MoviesDao moviesDao, Executor executor) {
+    private WebRepository(MoviesDao moviesDao, FavoriteDao favoriteDao, Executor executor) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webService = retrofit.create(WebService.class);
         this.moviesDao = moviesDao;
+        this.favoriteDao = favoriteDao;
         this.executor = executor;
     }
 
-    public static WebRepository init(MoviesDao moviesDao, Executor executor) {
+    public static WebRepository init(MoviesDao moviesDao, FavoriteDao favoriteDao, Executor executor) {
         if(repository == null) {
-            repository = new WebRepository(moviesDao, executor);
+            repository = new WebRepository(moviesDao, favoriteDao, executor);
         }
         return repository;
     }
@@ -83,5 +87,11 @@ public class WebRepository {
         refreshTvSeries();
         return moviesDao.getMovies();
     }
+
+    public LiveData<List<FavoriteItem>> loadFavorites() {
+        return favoriteDao.getAll();
+    }
+
+
 
 }

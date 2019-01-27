@@ -1,6 +1,8 @@
 package com.example.testapp.viewmodel;
 
+import com.example.testapp.dao.FavoriteDao;
 import com.example.testapp.dao.MoviesDao;
+import com.example.testapp.model.FavoriteItem;
 import com.example.testapp.model.MovieItem;
 import com.example.testapp.repository.WebRepository;
 
@@ -17,8 +19,8 @@ public class TvMoviesViewModel extends ViewModel {
     private LiveData<List<MovieItem>> tvSeries;
     private WebRepository repository;
 
-    TvMoviesViewModel(MoviesDao moviesDao, Executor executor) {
-        repository = WebRepository.init(moviesDao, executor);
+    TvMoviesViewModel(MoviesDao moviesDao, FavoriteDao favoriteDao, Executor executor) {
+        repository = WebRepository.init(moviesDao, favoriteDao, executor);
     }
 
     public LiveData<List<MovieItem>> getMovies() {
@@ -44,5 +46,9 @@ public class TvMoviesViewModel extends ViewModel {
 
     private void loadTvSeries() {
         tvSeries = repository.loadTvSeries();
+    }
+
+    public LiveData<List<FavoriteItem>> getFavorites() {
+        return repository.loadFavorites();
     }
 }

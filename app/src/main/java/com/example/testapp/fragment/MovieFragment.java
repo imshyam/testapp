@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.example.testapp.OnFragmentInteractionListener;
 import com.example.testapp.R;
 import com.example.testapp.adapter.MovieListAdapter;
+import com.example.testapp.dao.FavoriteDao;
 import com.example.testapp.dao.MovieDatabase;
 import com.example.testapp.dao.MoviesDao;
 import com.example.testapp.executer.AppExecutor;
@@ -82,9 +83,10 @@ public class MovieFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         MoviesDao moviesDao = MovieDatabase.getInstance(getActivity()).moviesDao();
+        FavoriteDao favoriteDao = MovieDatabase.getInstance(getActivity()).favoriteDao();
         Executor executor = AppExecutor.getInstance().diskIO();
 
-        ViewModelFactory viewModelFactory = new ViewModelFactory(moviesDao, executor);
+        ViewModelFactory viewModelFactory = new ViewModelFactory(moviesDao, favoriteDao, executor);
         TvMoviesViewModel viewModel = ViewModelProviders.of(this, viewModelFactory).get(TvMoviesViewModel.class);
 
         viewModel.getMovies().observe(this, allItems -> {
@@ -95,7 +97,7 @@ public class MovieFragment extends Fragment {
                 }
             }
             if(movieItems.size() > 0 && rootView != null) {
-                MovieListAdapter adapter = new MovieListAdapter(movieItems);
+                MovieListAdapter adapter = new MovieListAdapter(movieItems, favoriteDao);
                 recyclerView.setAdapter(adapter);
             }
         });
