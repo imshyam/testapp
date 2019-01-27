@@ -48,7 +48,7 @@ public class TvMoviesViewModel extends ViewModel {
         tvSeries = repository.loadTvSeries();
     }
 
-    public LiveData<List<FavoriteItem>> getFavorites() {
+    public LiveData<List<MovieItem>> getFavorites() {
         return repository.loadFavorites();
     }
 }

@@ -88,8 +88,8 @@ public class WebRepository {
         return moviesDao.getMovies();
     }
 
-    public LiveData<List<FavoriteItem>> loadFavorites() {
-        return favoriteDao.getAll();
+    public LiveData<List<MovieItem>> loadFavorites() {
+        return favoriteDao.getFavoriteMovies();
     }
 
 

@@ -15,6 +15,7 @@ import com.example.testapp.dao.MovieDatabase;
 import com.example.testapp.dao.MoviesDao;
 import com.example.testapp.executer.AppExecutor;
 import com.example.testapp.model.FavoriteItem;
+import com.example.testapp.model.MovieItem;
 import com.example.testapp.viewmodel.TvMoviesViewModel;
 import com.example.testapp.viewmodel.ViewModelFactory;
 
@@ -99,8 +100,8 @@ public class MyListFragment extends Fragment {
 
         viewModel.getFavorites().observe(this, favoriteItems -> {
             String s = "";
-            for (FavoriteItem fav:  favoriteItems) {
-                s += fav.getItemType() +  " : " + fav.getItemId() + " \n";
+            for (MovieItem fav:  favoriteItems) {
+                s += fav.getId() + fav.getOriginal_name() +  " : " + fav.getOriginal_title() + " \n";
             }
             tv.setText(s);
         });
