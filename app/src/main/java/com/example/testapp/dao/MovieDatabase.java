@@ -2,6 +2,7 @@ package com.example.testapp.dao;
 
 import android.content.Context;
 
+import com.example.testapp.model.FavoriteItem;
 import com.example.testapp.model.MovieItem;
 
 import androidx.room.Database;
@@ -9,10 +10,11 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = MovieItem.class, version = 1, exportSchema = false)
-@TypeConverters(GenreTypeConverter.class)
+@Database(entities = {MovieItem.class, FavoriteItem.class}, version = 1, exportSchema = false)
+@TypeConverters({GenreTypeConverter.class, HistoryItemTypeConverter.class})
 public abstract class MovieDatabase extends RoomDatabase {
 
+    public abstract FavoriteDao favoriteDao();
     public abstract MoviesDao moviesDao();
     private static final String DATABASE_NAME = "movies";
 
