@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.testapp.OnFragmentInteractionListener;
 import com.example.testapp.R;
+import com.example.testapp.adapter.MovieListAdapter;
 import com.example.testapp.dao.FavoriteDao;
 import com.example.testapp.dao.MovieDatabase;
 import com.example.testapp.dao.MoviesDao;
@@ -24,6 +25,8 @@ import java.util.concurrent.Executor;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,7 +42,7 @@ public class MyListFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    TextView tv;
+    RecyclerView fav_list;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -83,7 +86,7 @@ public class MyListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_my_list, container, false);
-        tv = rootView.findViewById(R.id.fav);
+        fav_list = rootView.findViewById(R.id.fav_list);
         return rootView;
     }
 
@@ -99,11 +102,10 @@ public class MyListFragment extends Fragment {
         TvMoviesViewModel viewModel = ViewModelProviders.of(this, viewModelFactory).get(TvMoviesViewModel.class);
 
         viewModel.getFavorites().observe(this, favoriteItems -> {
-            String s = "";
-            for (MovieItem fav:  favoriteItems) {
-                s += fav.getId() + fav.getOriginal_name() +  " : " + fav.getOriginal_title() + " \n";
-            }
-            tv.setText(s);
+            MovieListAdapter adapter = new MovieListAdapter(favoriteItems, favoriteDao);
+            fav_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+            fav_list.setHasFixedSize(true);
+            fav_list.setAdapter(adapter);
         });
 
 
