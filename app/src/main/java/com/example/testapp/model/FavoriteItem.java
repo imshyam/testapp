@@ -13,8 +13,7 @@ import lombok.Data;
         foreignKeys = @ForeignKey(
             entity = MovieItem.class,
             parentColumns = "id",
-            childColumns = "itemId",
-            onDelete = ForeignKey.CASCADE))
+            childColumns = "itemId"))
 @Data
 @AllArgsConstructor
 public class FavoriteItem {
