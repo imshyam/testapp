@@ -20,10 +20,13 @@ import com.example.testapp.model.MovieItem;
 import com.example.testapp.viewmodel.TvMoviesViewModel;
 import com.example.testapp.viewmodel.ViewModelFactory;
 
+import java.util.List;
 import java.util.concurrent.Executor;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -94,20 +97,16 @@ public class MyListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        MoviesDao moviesDao = MovieDatabase.getInstance(getActivity()).moviesDao();
         FavoriteDao favoriteDao = MovieDatabase.getInstance(getActivity()).favoriteDao();
-        Executor executor = AppExecutor.getInstance().diskIO();
 
-        ViewModelFactory viewModelFactory = new ViewModelFactory(moviesDao, favoriteDao, executor);
-        TvMoviesViewModel viewModel = ViewModelProviders.of(this, viewModelFactory).get(TvMoviesViewModel.class);
-
-        viewModel.getFavorites().observe(this, favoriteItems -> {
-            MovieListAdapter adapter = new MovieListAdapter(favoriteItems, favoriteDao, true);
+        LiveData<List<MovieItem>> moviesList = favoriteDao.getFavoriteMovies();
+        moviesList.observe(this, movieItems -> {
+            MovieListAdapter adapter = new MovieListAdapter(movieItems, favoriteDao, true);
             fav_list.setLayoutManager(new LinearLayoutManager(getActivity()));
             fav_list.setHasFixedSize(true);
             fav_list.setAdapter(adapter);
+            moviesList.removeObservers(MyListFragment.this);
         });
-
 
     }
 
