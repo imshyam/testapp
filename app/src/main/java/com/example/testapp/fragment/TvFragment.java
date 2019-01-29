@@ -98,7 +98,7 @@ public class TvFragment extends Fragment {
                 }
             }
             if(tvSeriesItems.size() > 0 && rootView != null) {
-                MovieListAdapter adapter = new MovieListAdapter(tvSeriesItems, favoriteDao);
+                MovieListAdapter adapter = new MovieListAdapter(tvSeriesItems, favoriteDao, false);
                 recyclerView.setAdapter(adapter);
             }
         });

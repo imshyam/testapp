@@ -102,7 +102,7 @@ public class MyListFragment extends Fragment {
         TvMoviesViewModel viewModel = ViewModelProviders.of(this, viewModelFactory).get(TvMoviesViewModel.class);
 
         viewModel.getFavorites().observe(this, favoriteItems -> {
-            MovieListAdapter adapter = new MovieListAdapter(favoriteItems, favoriteDao);
+            MovieListAdapter adapter = new MovieListAdapter(favoriteItems, favoriteDao, true);
             fav_list.setLayoutManager(new LinearLayoutManager(getActivity()));
             fav_list.setHasFixedSize(true);
             fav_list.setAdapter(adapter);

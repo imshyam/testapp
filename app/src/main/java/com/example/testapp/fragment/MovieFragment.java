@@ -97,7 +97,7 @@ public class MovieFragment extends Fragment {
                 }
             }
             if(movieItems.size() > 0 && rootView != null) {
-                MovieListAdapter adapter = new MovieListAdapter(movieItems, favoriteDao);
+                MovieListAdapter adapter = new MovieListAdapter(movieItems, favoriteDao, false);
                 recyclerView.setAdapter(adapter);
             }
         });
