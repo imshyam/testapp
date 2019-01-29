@@ -87,11 +87,4 @@ public class WebRepository {
         refreshTvSeries();
         return moviesDao.getMovies();
     }
-
-    public LiveData<List<MovieItem>> loadFavorites() {
-        return favoriteDao.getFavoriteMovies();
-    }
-
-
-
 }
