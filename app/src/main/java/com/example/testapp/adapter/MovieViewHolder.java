@@ -1,6 +1,7 @@
 package com.example.testapp.adapter;
 
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,7 +20,7 @@ class MovieViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    public void bindItem(MovieItem movie) {
+    public void bindItem(MovieItem movie, boolean isFavoriteList) {
         TextView title = itemView.findViewById(R.id.title);
         if(movie.getOriginal_title() != null)
             title.setText(movie.getOriginal_title());
@@ -29,5 +30,9 @@ class MovieViewHolder extends RecyclerView.ViewHolder {
         rating.setText(movie.getVote_average() + "");
         ImageView poster = itemView.findViewById(R.id.poster);
         Picasso.get().load(IMAGE_BASE + movie.getPoster_path()).into(poster);
+        if (isFavoriteList) {
+            ImageButton imageButton = itemView.findViewById(R.id.add_to_my_list);
+            imageButton.setImageResource(R.drawable.ic_remove_white_24dp);
+        }
     }
 }

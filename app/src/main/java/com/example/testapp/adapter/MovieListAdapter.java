@@ -19,10 +19,12 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MovieListAdapter extends RecyclerView.Adapter<MovieViewHolder> {
     List<MovieItem> movieItems;
     FavoriteDao favoriteDao;
+    boolean isFavoriteList;
 
-    public MovieListAdapter(List<MovieItem> movieItems, FavoriteDao favoriteDao) {
+    public MovieListAdapter(List<MovieItem> movieItems, FavoriteDao favoriteDao, boolean isFavoriteList) {
         this.movieItems = movieItems;
         this.favoriteDao = favoriteDao;
+        this.isFavoriteList = isFavoriteList;
     }
     @NonNull
     @Override
@@ -35,14 +37,15 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         MovieItem movie = movieItems.get(position);
-        holder.bindItem(movie);
-        holder.itemView.findViewById(R.id.add_to_my_list).setOnClickListener((view) -> {
-            // TODO: 25/1/19 insert to favorite
-            HistoryItemTypeEnum itemTypeEnum = movie.getOriginal_name() == null ?
-                    HistoryItemTypeEnum.MOVIE_ITEM : HistoryItemTypeEnum.TV_SERIES_ITEM;
-            AppExecutor executor = AppExecutor.getInstance();
-            executor.diskIO().execute(() -> favoriteDao.insertAll(new FavoriteItem(movie.getId(), itemTypeEnum)));
-        });
+        holder.bindItem(movie, isFavoriteList);
+        if (!isFavoriteList) {
+            holder.itemView.findViewById(R.id.add_to_my_list).setOnClickListener((view) -> {
+                HistoryItemTypeEnum itemTypeEnum = movie.getOriginal_name() == null ?
+                        HistoryItemTypeEnum.MOVIE_ITEM : HistoryItemTypeEnum.TV_SERIES_ITEM;
+                AppExecutor executor = AppExecutor.getInstance();
+                executor.diskIO().execute(() -> favoriteDao.insertAll(new FavoriteItem(movie.getId(), itemTypeEnum)));
+            });
+        }
     }
 
     @Override
