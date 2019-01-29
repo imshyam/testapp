@@ -38,14 +38,25 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieViewHolder> {
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         MovieItem movie = movieItems.get(position);
         holder.bindItem(movie, isFavoriteList);
-        if (!isFavoriteList) {
+        AppExecutor executor = AppExecutor.getInstance();
+        if (isFavoriteList) {
+            holder.itemView.findViewById(R.id.add_to_my_list).setOnClickListener((view) -> {
+                executor.diskIO().execute(() -> favoriteDao.deleteItem(movie.getId()));
+                removeMovieAt(position);
+            });
+        } else {
             holder.itemView.findViewById(R.id.add_to_my_list).setOnClickListener((view) -> {
                 HistoryItemTypeEnum itemTypeEnum = movie.getOriginal_name() == null ?
                         HistoryItemTypeEnum.MOVIE_ITEM : HistoryItemTypeEnum.TV_SERIES_ITEM;
-                AppExecutor executor = AppExecutor.getInstance();
                 executor.diskIO().execute(() -> favoriteDao.insertAll(new FavoriteItem(movie.getId(), itemTypeEnum)));
             });
         }
+    }
+
+    private void removeMovieAt(int position) {
+        movieItems.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, movieItems.size());
     }
 
     @Override
