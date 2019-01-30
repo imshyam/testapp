@@ -39,6 +39,11 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MovieFragment extends Fragment {
     private View rootView;
     private RecyclerView recyclerView;
+    private MovieListAdapter adapter;
+
+    private MoviesDao moviesDao;
+    private FavoriteDao favoriteDao;
+    private Executor executor;
 
     private OnFragmentInteractionListener mListener;
 
@@ -70,21 +75,23 @@ public class MovieFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        moviesDao = MovieDatabase.getInstance(getActivity()).moviesDao();
+        favoriteDao = MovieDatabase.getInstance(getActivity()).favoriteDao();
+        executor = AppExecutor.getInstance().diskIO();
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_movies, container, false);
+
         recyclerView = rootView.findViewById(R.id.movie_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter = new MovieListAdapter(new ArrayList<>(), favoriteDao, false);
+        recyclerView.setAdapter(adapter);
         return rootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        MoviesDao moviesDao = MovieDatabase.getInstance(getActivity()).moviesDao();
-        FavoriteDao favoriteDao = MovieDatabase.getInstance(getActivity()).favoriteDao();
-        Executor executor = AppExecutor.getInstance().diskIO();
 
         ViewModelFactory viewModelFactory = new ViewModelFactory(moviesDao, favoriteDao, executor);
         TvMoviesViewModel viewModel = ViewModelProviders.of(this, viewModelFactory).get(TvMoviesViewModel.class);
@@ -97,8 +104,7 @@ public class MovieFragment extends Fragment {
                 }
             }
             if(movieItems.size() > 0 && rootView != null) {
-                MovieListAdapter adapter = new MovieListAdapter(movieItems, favoriteDao, false);
-                recyclerView.setAdapter(adapter);
+                adapter.updateItems(movieItems);
             }
         });
     }

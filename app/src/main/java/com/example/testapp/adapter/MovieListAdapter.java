@@ -63,4 +63,9 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieViewHolder> {
     public int getItemCount() {
         return movieItems.size();
     }
+
+    public void updateItems(List<MovieItem> movieItems) {
+        this.movieItems.addAll(movieItems);
+        notifyDataSetChanged();
+    }
 }
