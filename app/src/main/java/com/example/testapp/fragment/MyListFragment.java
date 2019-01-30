@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.testapp.OnFragmentInteractionListener;
 import com.example.testapp.R;
@@ -15,19 +14,15 @@ import com.example.testapp.dao.FavoriteDao;
 import com.example.testapp.dao.MovieDatabase;
 import com.example.testapp.dao.MoviesDao;
 import com.example.testapp.executer.AppExecutor;
-import com.example.testapp.model.FavoriteItem;
 import com.example.testapp.model.MovieItem;
-import com.example.testapp.viewmodel.TvMoviesViewModel;
-import com.example.testapp.viewmodel.ViewModelFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,7 +40,10 @@ public class MyListFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    RecyclerView fav_list;
+    private MovieListAdapter adapter;
+    private MoviesDao moviesDao;
+    private FavoriteDao favoriteDao;
+    private Executor executor;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -87,9 +85,16 @@ public class MyListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        moviesDao = MovieDatabase.getInstance(getActivity()).moviesDao();
+        favoriteDao = MovieDatabase.getInstance(getActivity()).favoriteDao();
+        executor = AppExecutor.getInstance().diskIO();
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_my_list, container, false);
-        fav_list = rootView.findViewById(R.id.fav_list);
+        RecyclerView fav_list = rootView.findViewById(R.id.fav_list);
+        adapter = new MovieListAdapter(new ArrayList<>(), favoriteDao, true);
+        fav_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+        fav_list.setHasFixedSize(true);
+        fav_list.setAdapter(adapter);
         return rootView;
     }
 
@@ -101,10 +106,7 @@ public class MyListFragment extends Fragment {
 
         LiveData<List<MovieItem>> moviesList = favoriteDao.getFavoriteMovies();
         moviesList.observe(this, movieItems -> {
-            MovieListAdapter adapter = new MovieListAdapter(movieItems, favoriteDao, true);
-            fav_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-            fav_list.setHasFixedSize(true);
-            fav_list.setAdapter(adapter);
+            adapter.updateItems(movieItems);
             moviesList.removeObservers(MyListFragment.this);
         });
 

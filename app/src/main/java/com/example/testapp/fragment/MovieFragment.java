@@ -38,9 +38,8 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class MovieFragment extends Fragment {
     private View rootView;
-    private RecyclerView recyclerView;
-    private MovieListAdapter adapter;
 
+    private MovieListAdapter adapter;
     private MoviesDao moviesDao;
     private FavoriteDao favoriteDao;
     private Executor executor;
@@ -81,7 +80,7 @@ public class MovieFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_movies, container, false);
 
-        recyclerView = rootView.findViewById(R.id.movie_list);
+        RecyclerView recyclerView = rootView.findViewById(R.id.movie_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new MovieListAdapter(new ArrayList<>(), favoriteDao, false);
