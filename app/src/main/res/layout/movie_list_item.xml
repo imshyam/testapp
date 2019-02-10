@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="movie"
+            type="com.example.testapp.model.MovieItem" />
     </data>
 
     <FrameLayout
@@ -15,6 +18,7 @@
             android:id="@+id/poster"
             android:layout_width="match_parent"
             android:layout_height="@dimen/movie_item_height"
+            app:url="@{movie.poster_path}"
             android:scaleType="centerCrop" />
 
         <TextView
@@ -23,6 +27,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sample_name"
+            app:movie="@{movie.original_title}"
+            app:tvSeries="@{movie.original_name}"
             android:layout_gravity="bottom" />
 
 
@@ -31,7 +37,7 @@
             style="@style/listTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sample_rating"
+            android:text="@{Double.toString(movie.vote_average)}"
             android:layout_gravity="bottom|right" />
 
         <ImageButton
