@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 import com.example.testapp.R;
 import com.example.testapp.dao.FavoriteDao;
-import com.example.testapp.executer.AppExecutor;
+import com.example.testapp.executor.AppExecutor;
 import com.example.testapp.model.FavoriteItem;
 import com.example.testapp.model.HistoryItemTypeEnum;
 import com.example.testapp.model.MovieItem;

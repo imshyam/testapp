@@ -13,7 +13,7 @@ import com.example.testapp.adapter.MovieListAdapter;
 import com.example.testapp.dao.FavoriteDao;
 import com.example.testapp.dao.MovieDatabase;
 import com.example.testapp.dao.MoviesDao;
-import com.example.testapp.executer.AppExecutor;
+import com.example.testapp.executor.AppExecutor;
 import com.example.testapp.model.MovieItem;
 
 import java.util.ArrayList;
