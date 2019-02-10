@@ -1,4 +1,4 @@
-package com.example.testapp;
+package com.example.tmdb;
 
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -7,7 +7,7 @@ import com.squareup.picasso.Picasso;
 
 import androidx.databinding.BindingAdapter;
 
-import static com.example.testapp.URLs.IMAGE_BASE;
+import static com.example.tmdb.URLs.IMAGE_BASE;
 
 public class DataBindingAdapter {
 

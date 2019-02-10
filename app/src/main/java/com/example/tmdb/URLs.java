@@ -1,6 +1,6 @@
-package com.example.testapp;
+package com.example.tmdb;
 
-import static com.example.testapp.ApiKeys.API_KEY;
+import static com.example.tmdb.ApiKeys.API_KEY;
 
 public class URLs {
 

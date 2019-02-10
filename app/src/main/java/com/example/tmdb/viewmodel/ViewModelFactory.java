@@ -1,7 +1,7 @@
-package com.example.testapp.viewmodel;
+package com.example.tmdb.viewmodel;
 
-import com.example.testapp.dao.FavoriteDao;
-import com.example.testapp.dao.MoviesDao;
+import com.example.tmdb.dao.FavoriteDao;
+import com.example.tmdb.dao.MoviesDao;
 
 import java.util.concurrent.Executor;
 

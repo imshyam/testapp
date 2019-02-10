@@ -1,10 +1,9 @@
-package com.example.testapp.viewmodel;
+package com.example.tmdb.viewmodel;
 
-import com.example.testapp.dao.FavoriteDao;
-import com.example.testapp.dao.MoviesDao;
-import com.example.testapp.model.FavoriteItem;
-import com.example.testapp.model.MovieItem;
-import com.example.testapp.repository.WebRepository;
+import com.example.tmdb.dao.FavoriteDao;
+import com.example.tmdb.dao.MoviesDao;
+import com.example.tmdb.model.MovieItem;
+import com.example.tmdb.repository.WebRepository;
 
 import java.util.List;
 import java.util.concurrent.Executor;

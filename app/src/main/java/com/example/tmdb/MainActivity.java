@@ -1,4 +1,4 @@
-package com.example.testapp;
+package com.example.tmdb;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -6,9 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.testapp.fragment.TvFragment;
-import com.example.testapp.fragment.MyListFragment;
-import com.example.testapp.fragment.MovieFragment;
+import com.example.tmdb.fragment.TvFragment;
+import com.example.tmdb.fragment.MyListFragment;
+import com.example.tmdb.fragment.MovieFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
