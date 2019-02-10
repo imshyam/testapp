@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import com.example.testapp.R;
 import com.example.testapp.dao.FavoriteDao;
+import com.example.testapp.databinding.MovieListItemBinding;
 import com.example.testapp.executor.AppExecutor;
 import com.example.testapp.model.FavoriteItem;
 import com.example.testapp.model.HistoryItemTypeEnum;
@@ -29,9 +30,9 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieViewHolder> {
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_list_item,
-                parent, false);
-        return new  MovieViewHolder(view);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        MovieListItemBinding itemBinding = MovieListItemBinding.inflate(layoutInflater, parent, false);
+        return new  MovieViewHolder(itemBinding);
     }
 
     @Override
