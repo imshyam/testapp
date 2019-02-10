@@ -1,16 +1,15 @@
-package com.example.testapp.adapter;
+package com.example.tmdb.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.testapp.R;
-import com.example.testapp.dao.FavoriteDao;
-import com.example.testapp.databinding.MovieListItemBinding;
-import com.example.testapp.executor.AppExecutor;
-import com.example.testapp.model.FavoriteItem;
-import com.example.testapp.model.HistoryItemTypeEnum;
-import com.example.testapp.model.MovieItem;
+import com.example.tmdb.R;
+import com.example.tmdb.dao.FavoriteDao;
+import com.example.tmdb.databinding.MovieListItemBinding;
+import com.example.tmdb.executor.AppExecutor;
+import com.example.tmdb.model.FavoriteItem;
+import com.example.tmdb.model.HistoryItemTypeEnum;
+import com.example.tmdb.model.MovieItem;
 
 import java.util.List;
 

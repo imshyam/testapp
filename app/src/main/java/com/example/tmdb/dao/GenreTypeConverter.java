@@ -1,4 +1,4 @@
-package com.example.testapp.dao;
+package com.example.tmdb.dao;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

@@ -1,13 +1,12 @@
-package com.example.testapp.repository;
+package com.example.tmdb.repository;
 
 import android.util.Log;
 
-import com.example.testapp.dao.FavoriteDao;
-import com.example.testapp.dao.MoviesDao;
-import com.example.testapp.model.FavoriteItem;
-import com.example.testapp.model.MovieItem;
-import com.example.testapp.model.ResponseMovieJson;
-import com.example.testapp.service.WebService;
+import com.example.tmdb.dao.FavoriteDao;
+import com.example.tmdb.dao.MoviesDao;
+import com.example.tmdb.model.MovieItem;
+import com.example.tmdb.model.ResponseMovieJson;
+import com.example.tmdb.service.WebService;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -19,7 +18,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.testapp.URLs.BASE_URL;
+import static com.example.tmdb.URLs.BASE_URL;
 
 public class WebRepository {
 

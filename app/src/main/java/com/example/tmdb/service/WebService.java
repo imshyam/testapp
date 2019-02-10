@@ -1,12 +1,12 @@
-package com.example.testapp.service;
+package com.example.tmdb.service;
 
-import com.example.testapp.model.ResponseMovieJson;
+import com.example.tmdb.model.ResponseMovieJson;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-import static com.example.testapp.URLs.TRENDING_MOVIES_WEEK;
-import static com.example.testapp.URLs.TRENDING_TV_WEEK;
+import static com.example.tmdb.URLs.TRENDING_MOVIES_WEEK;
+import static com.example.tmdb.URLs.TRENDING_TV_WEEK;
 
 public interface WebService {
 

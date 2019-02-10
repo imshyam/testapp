@@ -1,4 +1,4 @@
-package com.example.testapp.model;
+package com.example.tmdb.model;
 
 import java.util.List;
 

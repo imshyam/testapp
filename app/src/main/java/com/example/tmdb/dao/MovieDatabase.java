@@ -1,9 +1,9 @@
-package com.example.testapp.dao;
+package com.example.tmdb.dao;
 
 import android.content.Context;
 
-import com.example.testapp.model.FavoriteItem;
-import com.example.testapp.model.MovieItem;
+import com.example.tmdb.model.FavoriteItem;
+import com.example.tmdb.model.MovieItem;
 
 import androidx.room.Database;
 import androidx.room.Room;

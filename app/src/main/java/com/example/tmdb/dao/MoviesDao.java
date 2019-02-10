@@ -1,6 +1,6 @@
-package com.example.testapp.dao;
+package com.example.tmdb.dao;
 
-import com.example.testapp.model.MovieItem;
+import com.example.tmdb.model.MovieItem;
 
 import java.util.List;
 

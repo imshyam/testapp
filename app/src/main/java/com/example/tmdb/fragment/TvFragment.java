@@ -1,4 +1,4 @@
-package com.example.testapp.fragment;
+package com.example.tmdb.fragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,16 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.testapp.OnFragmentInteractionListener;
-import com.example.testapp.R;
-import com.example.testapp.adapter.MovieListAdapter;
-import com.example.testapp.dao.FavoriteDao;
-import com.example.testapp.dao.MovieDatabase;
-import com.example.testapp.dao.MoviesDao;
-import com.example.testapp.executor.AppExecutor;
-import com.example.testapp.model.MovieItem;
-import com.example.testapp.viewmodel.TvMoviesViewModel;
-import com.example.testapp.viewmodel.ViewModelFactory;
+import com.example.tmdb.OnFragmentInteractionListener;
+import com.example.tmdb.R;
+import com.example.tmdb.adapter.MovieListAdapter;
+import com.example.tmdb.dao.FavoriteDao;
+import com.example.tmdb.dao.MovieDatabase;
+import com.example.tmdb.dao.MoviesDao;
+import com.example.tmdb.executor.AppExecutor;
+import com.example.tmdb.model.MovieItem;
+import com.example.tmdb.viewmodel.TvMoviesViewModel;
+import com.example.tmdb.viewmodel.ViewModelFactory;
 
 import java.util.ArrayList;
 import java.util.List;

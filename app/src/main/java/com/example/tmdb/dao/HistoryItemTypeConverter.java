@@ -1,11 +1,6 @@
-package com.example.testapp.dao;
+package com.example.tmdb.dao;
 
-import com.example.testapp.model.HistoryItemTypeEnum;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.Collections;
-import java.util.List;
+import com.example.tmdb.model.HistoryItemTypeEnum;
 
 import androidx.room.TypeConverter;
 

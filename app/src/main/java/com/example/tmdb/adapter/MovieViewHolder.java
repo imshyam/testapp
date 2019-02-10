@@ -1,7 +1,7 @@
-package com.example.testapp.adapter;
+package com.example.tmdb.adapter;
 
-import com.example.testapp.BR;
-import com.example.testapp.model.MovieItem;
+import com.example.tmdb.BR;
+import com.example.tmdb.model.MovieItem;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ViewDataBinding;
